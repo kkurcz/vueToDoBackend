@@ -1,9 +1,15 @@
-class TodosController < ApplicationController
+class API::V1::TodosController < ApplicationController
   before_action :set_todo, only: [:show, :update, :destroy]
 
   # GET /todos
   def index
     @todos = Todo.all
+    limit = params[:_limit]
+
+    if limit.present?
+      limit = limit.to_i
+      @todos = @todos.last(limit)
+    end
 
     render json: @todos
   end
