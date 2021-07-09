@@ -11,7 +11,7 @@ class API::V1::TodosController < ApplicationController
       @todos = @todos.last(limit)
     end
 
-    render json: @todos
+    render json: @todos.reverse
   end
 
   # GET /todos/1
